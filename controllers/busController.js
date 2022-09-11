@@ -32,7 +32,7 @@ exports.registerBus = catchAsyncErrors(async (req, res, next) => {
         profiler.done({
           message: err,
           level: 'error',
-          actionBy: req.user.id,
+          actionBy: fields.owner,
         });
 
         return res.status(400).json({
