@@ -77,7 +77,13 @@ exports.registerBus = catchAsyncErrors(async (req, res, next) => {
             actionBy: owner,
           });
           return next(
-            new ErrorHandler('Bus with this information already added')
+            new ErrorHandler(
+              'Bus with engine number ' +
+                engineNumber +
+                ' and license number ' +
+                busLicenseNumber +
+                ' already Added '
+            )
           );
         }
         const validBusPayload = {
