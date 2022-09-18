@@ -105,7 +105,7 @@ exports.registerBus = catchAsyncErrors(async (req, res, next) => {
             });
             return next(new ErrorHandler('Validation Service not Responding'));
           });
-        if (busValidity.data.result == true) {
+        if (busValidity.data.bus) {
           const bus = await BusModel.create({
             busName: busName,
             busLicenseDoc: 'tempUrl',
@@ -137,13 +137,11 @@ exports.registerBus = catchAsyncErrors(async (req, res, next) => {
           }
         } else {
           profiler.done({
-            message: busValidity.data.message,
+            message: `Validation failed for Bus with Engine Number ${engineNumber} and Bus Number ${busLicenseNumber}`,
             level: 'error',
             actionBy: owner,
           });
-          res
-            .status(400)
-            .json({ success: false, message: busValidity.data.message });
+          res.status(400).json({ success: false, message: 'Bus not valid' });
         }
       } catch (error) {
         profiler.done({
