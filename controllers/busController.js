@@ -94,7 +94,7 @@ exports.registerBus = catchAsyncErrors(async (req, res, next) => {
 
         const busValidity = await axios
           .post(
-            'http://44.202.73.200:8006/api/v1/crosscheck/bus',
+            'http://18.213.177.252:8006/api/v1/crosscheck/bus',
             validBusPayload
           )
           .catch(function (error) {
